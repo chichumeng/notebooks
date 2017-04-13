@@ -22,3 +22,21 @@ certbot renew
 sudo crontab -e
 30 2 * * 1 /usr/bin/certbot renew  >> /var/log/le-renew.log
 ```
+
+## nginx online
+```
+//准备工作
+location ^~ /.well-known/acme-challenge/ {
+   default_type "text/plain";
+   root     /usr/share/nginx/html;
+}
+//生成成功后
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl ipv6only=on;
+
+    ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
+    ssl_trusted_certificate /etc/letsencrypt/live/example.com/chain.pem;
+}
+```
