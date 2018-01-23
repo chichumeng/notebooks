@@ -27,9 +27,10 @@ sudo crontab -e
 ```
 //准备工作
 location ^~ /.well-known/acme-challenge/ {
-   default_type "text/plain";
-   root     /usr/share/nginx/html;
+    root    /data/www/certbots/example.com;
+    try_files $uri /index.php?$query_string;
 }
+
 //生成成功后
 server {
     listen 443 ssl;
