@@ -41,3 +41,7 @@ server {
     ssl_trusted_certificate /etc/letsencrypt/live/example.com/chain.pem;
 }
 ```
+
+```
+service force-reload nginx
+```
