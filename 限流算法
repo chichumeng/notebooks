@@ -1,0 +1,63 @@
+<?php
+// 常见四种限流算法  单位时间内,滑动时间(把时间分成多段,比如按秒,分来划分),漏桶算法,令牌算法
+
+class Leaky{
+    private $max = 10; // 水桶容量
+    private $rate = 1; // 每单位时间 漏水速率
+
+    public $lastTime = 0; // 最后一次请求时间
+    private $current = 0; // 当前水量
+
+    public function __construct(){
+        $this->lastTime = time();
+    }
+    public function hit(){
+        $now = time();
+        $this->current = max(0,$this->current - (($now - $lastTime) * $rate));
+
+        $lastTime = $now;
+        
+
+        if(($this->current+1) > $this->max){
+            return false;
+        }
+
+        $this->current ++;
+
+        return true;
+    }
+}
+
+class TokenBucket{
+    private  $lastTime; // 最后访问时间
+    public  $max = 10;// 桶的容量
+    public  $rate = 1; // 令牌放入的速度
+    public  $tokens = 10;// 当前令牌的数量
+
+
+    public function __construct()
+    {
+        $this->lastTime = time();
+    }
+    public function hit(){
+        $now=time();
+        $this->tokens=min($this->max,$this->tokens+($now-$this->lastTime)*$this->rate);
+        $this->lastTime=$now; // 修改最后访问时间
+        if($this->tokens<1){
+            // 若不到1个令牌,则拒绝
+            return false;
+        }
+        
+        // 还有令牌，领取令牌
+        $this->tokens -= 1;
+        return true;
+    }
+
+}
+
+
+$token = new TokenBucket();
+
+for ($i=0; $i < 20; $i++) { 
+    var_dump($token->hit());
+}
