@@ -1,0 +1,17 @@
+#!/bin/sh
+unset GIT_DIR
+NowPath=`pwd`
+echo "now path is :"$NowPath
+GitPath="/home/www/kanggou.com/Module/Zt"
+echo "git path is :"$GitPath
+cd $GitPath
+echo "cd git path"
+#git add . -A && git stash # remove local changes
+#git pull origin master # pull data from master
+# the follow line is also ok:
+git add . && git fetch origin && git reset --hard origin/master
+echo "git done"
+cd $NowPath
+echo "fine"
+# --- Finished
+exit 0
