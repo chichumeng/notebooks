@@ -2,7 +2,7 @@
 unset GIT_DIR
 NowPath=`pwd`
 echo "now path is :"$NowPath
-GitPath="/home/www/kanggou.com/Module/Zt"
+GitPath="/home/www/site"
 echo "git path is :"$GitPath
 cd $GitPath
 echo "cd git path"
