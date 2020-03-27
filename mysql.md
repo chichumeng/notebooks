@@ -9,3 +9,7 @@ GRANT Alter, Alter Routine, Create, Create Routine, Create Temporary Tables, Cre
 alter user 'root'@'localhost' identified by 'cy7m0ypu8CpLFperzI45';
 
 flush privileges;
+
+
+//负载测试
+mysqlslap --host=rm-d9jp9jzfgbj09585r.mysql.ap-southeast-5.rds.aliyuncs.com --user=daichao --create-schema=daichao --concurrency=100  --number-of-queries=1000 --iterations=10 --auto-generate-sql -p
