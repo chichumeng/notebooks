@@ -12,3 +12,5 @@ docker run --net=网络名称 tomcat
 
 docker network disconnect 网络名称 tomcat
 docker network connect 网络名称  tomcat
+
+docker run --rm -dit --name excalidraw -p 5000:80 excalidraw/excalidraw:latest
